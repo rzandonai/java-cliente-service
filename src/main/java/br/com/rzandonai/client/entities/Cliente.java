@@ -1,5 +1,6 @@
 package br.com.rzandonai.client.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -19,8 +21,9 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
-    private long id;
+    private Long id;
 
+    @NotBlank
     private String nome;
 
     private String rua;
@@ -34,11 +37,11 @@ public class Cliente {
     private String cep;
 
     private String pais;
+    @JsonIgnore
+    private Date dataAtualizacao;
 
     @JsonIgnore
-    private Date dtUpdate;
-    @JsonIgnore
-    private Date dtCreate;
+    private Date dataCriacao;
 
     @CPF
     @Column(unique = true)

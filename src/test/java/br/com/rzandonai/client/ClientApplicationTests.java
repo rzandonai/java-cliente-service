@@ -48,7 +48,6 @@ class ClientApplicationTests {
 
     Gson gson = new Gson();
 
-
     @Test
     public void testCriarCliente() throws Exception {
         createCliente("Ricardo");

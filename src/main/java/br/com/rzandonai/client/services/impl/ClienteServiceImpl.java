@@ -28,14 +28,17 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Cacheable(cacheNames = "clientes")
     @Override
-    public Page<Cliente> findAll(Specification spec, Pageable pageable) {
-        return this.clienteRepository.findAll(spec, pageable);
+    public Page findAll(Specification spec, Pageable pageable) {
+        return  this.clienteRepository.findAll(spec, pageable);
     }
 
     @CacheEvict(cacheNames = "clientes", allEntries = true)
     @Override
     public Cliente add(Cliente cliente) {
-        cliente.setDtCreate(new Date());
+        if(cliente.getId() != null){
+            throw new ValidationException("Só é possivel inserir um registro sem id");
+        }
+        cliente.setDataCriacao(new Date());
         return this.clienteRepository.save(cliente);
     }
 
@@ -54,7 +57,7 @@ public class ClienteServiceImpl implements ClienteService {
         repCliente.setCidade(cliente.getCidade());
         repCliente.setPais(cliente.getPais());
         repCliente.setCpf(cliente.getCpf());
-        repCliente.setDtUpdate(new Date());
+        repCliente.setDataAtualizacao(new Date());
         return this.clienteRepository.save(repCliente);
     }
 
