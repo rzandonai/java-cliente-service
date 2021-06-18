@@ -18,6 +18,11 @@ repositories {
 	mavenCentral()
 }
 
+jar {
+	enabled = true
+	archiveClassifier = '' //use empty string
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -37,6 +42,7 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
 }
+
 
 test {
 	useJUnitPlatform()
