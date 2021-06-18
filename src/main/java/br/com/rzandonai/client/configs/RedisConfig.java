@@ -1,4 +1,4 @@
-package br.com.rzandonai.client.config;
+package br.com.rzandonai.client.configs;
 
 import java.io.Serializable;
 
@@ -28,9 +28,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableCaching
 public class RedisConfig {
-
-    @Autowired
-    private CacheManager cacheManager;
 
     @Value("${spring.redis.host}")
     private String redisHost;

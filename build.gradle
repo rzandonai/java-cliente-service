@@ -25,11 +25,17 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.hibernate.validator:hibernate-validator:7.0.1.Final'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testRuntimeOnly 'com.h2database:h2'
 	testImplementation 'it.ozimov:embedded-redis:0.7.2'
+	implementation 'com.sipios:spring-search:0.2.0'
+	implementation 'com.google.code.gson:gson:2.8.7'
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
 }
 
 test {
