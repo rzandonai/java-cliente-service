@@ -1,12 +1,13 @@
 package br.com.rzandonai.client;
 
+import br.com.rzandonai.client.configs.SpecificationConfig;
 import br.com.rzandonai.client.entities.Cliente;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.lettuce.core.RedisURI;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-@ImportAutoConfiguration(classes = {CacheAutoConfiguration.class, RedisAutoConfiguration.class, Config.class})
+@ImportAutoConfiguration(classes = {CacheAutoConfiguration.class, RedisAutoConfiguration.class, SpecificationConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ClientApplicationTests {
 
@@ -146,8 +147,9 @@ class ClientApplicationTests {
     static class EmbeddedRedisConfiguration {
         private final RedisServer redisServer;
 
-        public EmbeddedRedisConfiguration(@Value("${spring.redis.port}") int redisPort) {
-            this.redisServer = new RedisServer(redisPort);
+        public EmbeddedRedisConfiguration() {
+            this.redisServer = new RedisServer(5432);
+            System.setProperty("REDIS_URL", RedisURI.Builder.redis("localhost", 5432).build().toString());
         }
 
         @PostConstruct
@@ -160,4 +162,5 @@ class ClientApplicationTests {
             this.redisServer.stop();
         }
     }
+
 }

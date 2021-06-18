@@ -73,7 +73,11 @@ public class RedisConfig {
 
             HostnameVerifier bogusHostnameVerifier = (hostname, session) -> true;
 
-            return new Jedis(URI.create(System.getenv("REDIS_URL")),
+            String redisUrl = System.getenv("REDIS_URL");
+            if (redisUrl == null || redisUrl.trim().isBlank()) {
+                return new Jedis(URI.create(System.getProperty("REDIS_URL")));
+            }
+            return new Jedis(URI.create(redisUrl),
                     sslContext.getSocketFactory(),
                     sslContext.getDefaultSSLParameters(),
                     bogusHostnameVerifier);
