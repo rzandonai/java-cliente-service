@@ -25,8 +25,7 @@ import redis.embedded.RedisServer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -59,6 +58,18 @@ class ClientApplicationTests {
         createCliente(nome);
         buscarCliente(nome);
     }
+
+    @Test
+    public void testCriarClienteBuscaPorOutroNome() throws Exception {
+        String nome = "Leonardo";
+        createCliente(nome);
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> buscarCliente("Pedro"),
+                "Expected IndexOutOfBoundsException() to throw, but it didn't"
+        );
+    }
+
 
     @Test
     public void testCriarClienteBuscaPorNomeAtualizarCEP() throws Exception {
@@ -131,7 +142,7 @@ class ClientApplicationTests {
 
     private Cliente atualizarCliente(Cliente cliente) throws Exception {
         String json = gson.toJson(cliente);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put(String.format("%s/%s",BASE_URL,cliente.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
                 .accept(MediaType.APPLICATION_JSON))

@@ -17,6 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Cliente", schema = "public")
 public class Cliente {
+    private static final long serialVersionUID = -1621704437021384404L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

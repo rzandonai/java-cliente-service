@@ -24,13 +24,14 @@ public class ClienteController {
      * Método responsável por pesquisar cliente usando Query Strings.
      * Utilize os parametros do cliente para buscar id nome etc...
      *
-     * @param pageable pageable
+     * @param pageable Paginação
+     * @param search  Faz buscas utilizando a documentação do https://github.com/sipios/spring-search
      */
 
     @GetMapping(value = "/clientes")
-    public ResponseEntity<Page<Cliente>> getClientes(@SearchSpec Specification<Cliente> specs,
+    public ResponseEntity<Page<Cliente>> getClientes(@SearchSpec Specification<Cliente> search,
                                                      @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) final Pageable pageable) {
-        return ResponseEntity.ok(this.clienteService.findAll(specs, pageable));
+        return ResponseEntity.ok(this.clienteService.findAll(search, pageable));
     }
 
     @GetMapping(value = "/clientes/{id}")
