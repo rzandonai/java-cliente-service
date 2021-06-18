@@ -8,6 +8,11 @@ spring:
       hibernate:
         show_sql: true
     database: postgresql
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+
 
   jackson:
     serialization:
@@ -22,8 +27,7 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_URL}
     timeout: 10000ms
     lettuce:
       pool:
