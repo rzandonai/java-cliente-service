@@ -43,8 +43,9 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.clienteService.add(Cliente));
     }
 
-    @PutMapping(value = "/clientes")
-    public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente Cliente) {
+    @PutMapping(value = "/clientes/{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable("id") Long id,@RequestBody Cliente Cliente) {
+        Cliente.setId(id);
         Cliente updated = this.clienteService.update(Cliente);
         return ResponseEntity.ok(updated);
     }

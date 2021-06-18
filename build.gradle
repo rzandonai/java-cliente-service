@@ -44,8 +44,8 @@ dependencies {
 	testImplementation 'it.ozimov:embedded-redis:0.7.2'
 	implementation 'com.sipios:spring-search:0.2.0'
 	implementation 'com.google.code.gson:gson:2.8.7'
-	implementation 'io.springfox:springfox-swagger2:3.0.0'
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.5.9'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.5.9'
 
 }
 

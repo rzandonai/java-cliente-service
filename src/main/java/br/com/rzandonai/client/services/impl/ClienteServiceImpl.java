@@ -29,7 +29,6 @@ public class ClienteServiceImpl implements ClienteService {
     @Cacheable(cacheNames = "clientes")
     @Override
     public Page<Cliente> findAll(Specification spec, Pageable pageable) {
-        waitTime();
         return this.clienteRepository.findAll(spec, pageable);
     }
 
@@ -69,16 +68,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Cacheable(cacheNames = "cliente", key = "#id", unless = "#result == null")
     @Override
     public Cliente getClienteById(long id) {
-        waitTime();
         return this.clienteRepository.findById(id).orElse(null);
-    }
-
-    private void waitTime() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
