@@ -5,6 +5,7 @@
 
 [![test](https://github.com/rzandonai/java-cliente-service/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rzandonai/java-cliente-service/actions/workflows/gradle.yml)
 
+[![Coverage](.github/badges/jacoco.svg)](https://github.com/rzandonai/java-cliente-service/actions/workflows/gradle.yml)
 # Escopo
 criar, editar, listar e atualizar os dados por completo e também de forma granular.
 
