@@ -55,8 +55,8 @@ public class RedisConfig {
         return redisCacheManager;
     }
 
-    private static Jedis getConnection() {
-        try {
+    private static Jedis getConnection() throws NoSuchAlgorithmException, KeyManagementException {
+
             TrustManager bogusTrustManager = new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
@@ -76,20 +76,13 @@ public class RedisConfig {
 
             String redisUrl = System.getenv("REDIS_URL");
             if (redisUrl == null || redisUrl.trim().isBlank()) {
-                return new Jedis(URI.create(System.getProperty("REDIS_URL")));
+                redisUrl = System.getProperty("REDIS_URL");
             }
-            return new Jedis(URI.create(redisUrl),
-                    sslContext.getSocketFactory(),
-                    sslContext.getDefaultSSLParameters(),
-                    bogusHostnameVerifier);
-
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            throw new RuntimeException("Cannot obtain Redis connection!", e);
-        }
+            return new Jedis(URI.create(redisUrl), sslContext.getSocketFactory(), sslContext.getDefaultSSLParameters(), bogusHostnameVerifier);
     }
 
     @PostConstruct
-    public void clearCache() {
+    public void clearCache() throws NoSuchAlgorithmException, KeyManagementException {
         Jedis jedis = getConnection();
         jedis.flushAll();
         jedis.close();

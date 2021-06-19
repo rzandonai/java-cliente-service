@@ -70,6 +70,13 @@ class ClientApplicationTests {
         );
     }
 
+    @Test
+    public void testCriarClienteBuscaPorId() throws Exception {
+        String nome = "Leonardo";
+        Cliente cliente = createCliente(nome);
+       buscarClientePorId(cliente.getId());
+    }
+
 
     @Test
     public void testCriarClienteBuscaPorNomeAtualizarCEP() throws Exception {
@@ -136,9 +143,18 @@ class ClientApplicationTests {
                 .andExpect(status().isOk())
                 .andReturn();
         return gson.fromJson(new Gson().fromJson(result.getResponse().getContentAsString(), JsonObject.class).getAsJsonObject().get("content").getAsJsonArray().get(0).toString(), Cliente.class);
-
     }
 
+
+    private Cliente buscarClientePorId(Long id) throws Exception {
+        System.out.println(String.format("%s/%s",BASE_URL,id));
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(String.format("%s/%s",BASE_URL,id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        return gson.fromJson(result.getResponse().getContentAsString(), Cliente.class);
+    }
 
     private Cliente atualizarCliente(Cliente cliente) throws Exception {
         String json = gson.toJson(cliente);
