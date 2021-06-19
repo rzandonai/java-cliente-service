@@ -25,5 +25,6 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Official SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v1.0.0
+    - uses: AppThreat/sast-scan-action@master
+      with:
+        type: "java"
