@@ -16,6 +16,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
   app:
     build: .
     ports:
@@ -26,6 +27,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: f8N25jp63RLjnza2
       SPRING_REDIS_HOST: cache
       SPRING_REDIS_PORT: 6379
+      REDIS_URL : redis://cache:6379
     depends_on:
       - db
       - cache
