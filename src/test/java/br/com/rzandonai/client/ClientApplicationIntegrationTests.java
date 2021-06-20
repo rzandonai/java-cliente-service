@@ -34,18 +34,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ImportAutoConfiguration(classes = {CacheAutoConfiguration.class, RedisAutoConfiguration.class, SpecificationConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class ClientApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
+class ClientApplicationIntegrationTests {
 
     private final static String BASE_URL = "/clientes";
 
     @Autowired
     private MockMvc mockMvc;
 
-    Gson gson = new Gson();
+    final Gson gson = new Gson();
 
     @Test
     public void testCriarCliente() throws Exception {
@@ -74,7 +70,7 @@ class ClientApplicationTests {
     public void testCriarClienteBuscaPorId() throws Exception {
         String nome = "Leonardo";
         Cliente cliente = createCliente(nome);
-       buscarClientePorId(cliente.getId());
+       assertNotNull(buscarClientePorId(cliente.getId()).getNome());
     }
 
 
@@ -147,7 +143,6 @@ class ClientApplicationTests {
 
 
     private Cliente buscarClientePorId(Long id) throws Exception {
-        System.out.println(String.format("%s/%s",BASE_URL,id));
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(String.format("%s/%s",BASE_URL,id))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -174,8 +169,8 @@ class ClientApplicationTests {
         private final RedisServer redisServer;
 
         public EmbeddedRedisConfiguration() {
-            this.redisServer = new RedisServer(5432);
-            System.setProperty("REDIS_URL", RedisURI.Builder.redis("localhost", 5432).build().toString());
+            this.redisServer = new RedisServer(5535);
+            System.setProperty("REDIS_URL", RedisURI.Builder.redis("localhost", 5535).build().toString());
         }
 
         @PostConstruct

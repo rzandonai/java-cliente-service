@@ -50,9 +50,8 @@ public class RedisConfig {
                         RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(new GenericJackson2JsonRedisSerializer()));
-        RedisCacheManager redisCacheManager = RedisCacheManager.builder(factory).cacheDefaults(redisCacheConfiguration)
+        return RedisCacheManager.builder(factory).cacheDefaults(redisCacheConfiguration)
                 .build();
-        return redisCacheManager;
     }
 
     private static Jedis getConnection() throws NoSuchAlgorithmException, KeyManagementException {

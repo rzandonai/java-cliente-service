@@ -26,7 +26,7 @@ spring:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   redis:
     host: localhost
-    port: 5432
+    port: 5535
     timeout: 10000ms
     lettuce:
       pool:

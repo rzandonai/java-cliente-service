@@ -23,12 +23,15 @@ import javax.validation.ValidationException;
 @CacheConfig(cacheNames = "clienteCache")
 public class ClienteServiceImpl implements ClienteService {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+
+    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @Cacheable(cacheNames = "clientes")
     @Override
-    public Page findAll(Specification spec, Pageable pageable) {
+    public Page<Cliente> findAll(Specification spec, Pageable pageable) {
         return  this.clienteRepository.findAll(spec, pageable);
     }
 

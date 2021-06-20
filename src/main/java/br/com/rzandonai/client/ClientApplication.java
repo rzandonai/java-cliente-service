@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 @SpringBootApplication
 @ImportAutoConfiguration(classes = {CacheAutoConfiguration.class, RedisAutoConfiguration.class, SpecificationConfig.class})

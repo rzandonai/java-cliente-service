@@ -16,9 +16,11 @@ import br.com.rzandonai.client.services.ClienteService;
 @RestController
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     /**
      * Método responsável por pesquisar cliente usando Query Strings.
@@ -30,7 +32,7 @@ public class ClienteController {
 
     @GetMapping(value = "/clientes")
     public ResponseEntity<Page<Cliente>> getClientes(@SearchSpec Specification<Cliente> search,
-                                                     @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) final Pageable pageable) {
+                                                     @PageableDefault(sort = "id", direction = Sort.Direction.ASC) final Pageable pageable) {
         return ResponseEntity.ok(this.clienteService.findAll(search, pageable));
     }
 
