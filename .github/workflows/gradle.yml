@@ -64,7 +64,7 @@ jobs:
         uses: ivanamat/defectdojo-import-scan@v1
         with:
           token: ${{ secrets.DEFECTOJO_TOKEN }}
-          defectdojo_url: ${{ secrets.DEFECTOJO_URL }}
+          defectdojo_url: https://defectdojo.satty.com.br
           engagement: 6
           file: ./codeql/java.sarif
           scan_type: SARIF
