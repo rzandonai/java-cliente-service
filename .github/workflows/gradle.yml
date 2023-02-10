@@ -66,12 +66,9 @@ jobs:
           token: ${{ secrets.DEFECTOJO_TOKEN }}
           defectdojo_url: ${{ secrets.DEFECTOJO_URL }}
           engagement: 6
-          product_name: Sitema_RH
           file: ./codeql/java.sarif
           scan_type: SARIF
-          test_title: Dependency check
           tags: dependency_check
-          skip_duplicates: true
           close_old_findings: true
           branch_tag: main
           build_id: ${{ github.run_id }}
