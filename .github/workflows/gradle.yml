@@ -63,7 +63,7 @@ jobs:
         id: import-scan
         uses: ivanamat/defectdojo-import-scan@v1
         with:
-          token: ${{ secrets.DEFECTOJO_TOKEN }}
+          token: b53a102ec0e13d12673f321e02d937fbfc110bfb
           defectdojo_url: https://defectdojo.satty.com.br
           engagement: 6
           file: ./codeql/java.sarif
