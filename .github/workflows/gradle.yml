@@ -65,8 +65,8 @@ jobs:
         with:
           token: ${{ secrets.DEFECTOJO_TOKEN }}
           defectdojo_url: ${{ secrets.DEFECTOJO_URL }}
-          engagement: ${{ secrets.ENGAGEMENT }}
-          product_name: ${{ secrets.PRODUCT_NAME }}
+          engagement: 6
+          product_name: Sitema_RH
           file: ./codeql/java.sarif
           scan_type: SARIF
           test_title: Dependency check
